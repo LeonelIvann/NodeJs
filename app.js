@@ -2,10 +2,10 @@ const fs = require('fs');
 
 class Contenedor {
     constructor(nombre) {
-        this.title = title;
-        this.price = price;
-        this.thumbnail = thumbnail;
-        this.id = id;
+        this.title = productos.nombre;
+        this.price = productos.price;
+        this.thumbnail = productos.thumbnail;
+        this.id = productos.id;
     }
 }
 
@@ -38,41 +38,93 @@ const createArchive = () => {
     return archivoCreate, archivoTxtCreate;
 }
 
-
 const express = require('express');
+const multer = require('multer');
+const exp = require('constants');
+const { createSecretKey } = require('crypto');
 const app = express();
 const PORT = 8080;
 
-const allProd = () => {
-    const readFile = fs.readFileSync('productos.json', 'utf8', (err, data) => {
-        if (err) throw err;
-        return data;
-    });
-    const productos = readFile.split('\n');
-    return productos;
-}
-
-const radd = (productos) => {
-    const readFile = fs.readFileSync('productos.json', 'utf8');
-    const fileParse = JSON.parse(readFile);
-    const randomParse = Math.floor(Math.random() * fileParse.length);
-    const randomProduct = fileParse[randomParse];
-    return randomProduct.title + ' ' + randomProduct.price + ' ' + randomProduct.thumbnail + ' ' + randomProduct.id;
-}
-
-console.log(radd());
-
-app.get('/', (req, res) => {
-    res.send('<h3 style="text-align: center;">Tus dos opciones son, <button><a href="/productos">Productos</a></button> o <button><a href="/productosRandom">Producto Random</a></button></h3>');
-});
-
-app.get('/productos', (req, res) => {
-    res.send('<h3 style="text-align: center;">Productos</h3> <button><a href="/productosRandom">Producto Random</a></button>  <br> <ul>' + allProd().map(prod => '<p style="font-family: arial;">' + prod + '</p>').join('') + '</ul>');
-});
-app.get('/productosRandom', (req, res) => {
-    res.send('<h3 style="text-align: center;">Producto Random</h3> <button><a href="/productos">Productos</a></button>  <br> ' + radd());
-});
-
 app.listen(PORT, () => {
     console.log(`Introduce en tu navegador :  localhost:${PORT}`);
+});
+
+const newProduct = (productos) => {
+    const readFile = fs.readFileSync('productos.json', 'utf8');
+    const fileParse = JSON.parse(readFile);
+    const newProduct = new Contenedor(productos.title, productos.price, productos.thumbnail, productos.id);
+    fileParse.push(newProduct);
+    const newFile = JSON.stringify(fileParse, 2, 3);
+    fs.writeFileSync('productos.json', newFile);
+}
+
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/submit-form', (req, res) => {
+    const username = req.body.nombre
+    const precio = req.body.precio
+    const imagen = req.body.imagen
+    const id = Math.floor(Math.random() * 1000000);
+    const productos = {
+        "title": username,
+        "price": precio,
+        "thumbnail": imagen,
+        "id": id
+    }
+    newProduct(productos);
+    res.redirect('/');
+});
+
+app.get('/', (req, res) => {
+    res.status(200).sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/api/productos', (req, res) => {
+    const readFile = fs.readFileSync('productos.json', 'utf8');
+    const fileParse = JSON.parse(readFile);
+    res.status(200).send(fileParse);
+});
+
+app.get('/api/productos/:id', (req, res) => {
+    const id = req.params.id;
+    const readFile = fs.readFileSync('productos.json', 'utf8');
+    const fileParse = JSON.parse(readFile);
+    const productos = fileParse.filter(producto => producto.id == id);
+    res.status(200).send(productos);
+});
+
+app.post('/api/productos', (req, res) => {
+    const username = "Vino"
+    const precio = "400"
+    const imagen = "https://cdn.shopify.com/s/files/1/0005/4634/0925/products/DVL-Tinto-2021_2048x2048.jpg?v=1640274188"
+    const id = Math.floor(Math.random() * 1000000);
+    const productos = {
+        "title": username,
+        "price": precio,
+        "thumbnail": imagen,
+        "id": id
+    }
+    newProduct(productos);
+    res.status(200).send(productos);
+});
+
+app.put('/api/productos/:id', (req, res) => {
+    const id = req.params.id;
+    const readFile = fs.readFileSync('productos.json', 'utf8');
+    const fileParse = JSON.parse(readFile);
+    const productos = fileParse.filter(producto => producto.id == id);
+    const newProduct = new Contenedor(req.body.title, req.body.price, req.body.thumbnail, req.body.id);
+    const newFile = JSON.stringify(fileParse, 2, 3);
+    fs.writeFileSync('productos.json', newFile);
+    res.status(200).send(productos);
+});
+
+app.delete('/api/productos/:id', (req, res) => {
+    const id = req.params.id;
+    const readFile = fs.readFileSync('productos.json', 'utf8');
+    const fileParse = JSON.parse(readFile);
+    const productos = fileParse.filter(producto => producto.id != id);
+    const newFile = JSON.stringify(fileParse, 2, 3);
+    fs.writeFileSync('productos.json', newFile);
+    res.status(200).send(productos);
 });
