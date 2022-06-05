@@ -1,0 +1,34 @@
+<% if ( productos.length===0) { %>
+    <h2>NO HAY PRODUCTOS INGRESADOS</h2>
+    <% } else { %>
+        <table class="table-fixed">
+            <thead>
+                <tr>
+                    <th class="w-1/2 px-4 py-2">Thumbnail</th>
+                    <th class="w-1/4 px-4 py-2">TITULO / NOMBRE</th>
+                    <th class="w-1/4 px-4 py-2">PRECIO</th>
+                    <th class="w-1/4 px-4 py-2">ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% productos.forEach(elemento=> { %>
+                    <tr>
+                        <td class="border px-4 py-2 td-img">
+                            <div class="container-img">
+                                <img src="<%= elemento.thumbnail %>" alt="">
+                            </div>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= elemento.title %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= elemento.price %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= elemento.id %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    <% } %>
