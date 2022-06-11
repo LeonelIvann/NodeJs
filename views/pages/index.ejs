@@ -9,10 +9,9 @@
 </head>
 <style>
   ::-webkit-scrollbar {
-    display: none;
+    width: 0px;
   }
   body{
-      overflow: scroll;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,24 +20,47 @@
       width: 100vw;
   }
   form{
-    height: 60vh;
-    margin-top: 15rem;
-  }
-  .container-img{
-    width: 20rem;
+    height: 18rem;
   }
   .td-img{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 8rem;
-    overflow: scroll;
+    overflow: overlay;
   }
   .menu{
     margin: 1.8rem 2rem 3rem 2rem;
     width: -webkit-fill-available;
     display: flex;
     justify-content: space-between;
+  }
+  .contentForm{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: -webkit-fill-available;
+    height: 30rem;
+    justify-content: space-around;
+  }
+  .tablaDeProductos{
+    text-align: center;
+    margin: 1.8rem 0rem 3rem 0rem;
+    width: 72rem;
+    border-radius: 5px;
+  }
+  .container-img img{
+    height: 8rem;
+  }
+  .tbodyClass{
+    height: 10rem;
+    overflow: scroll;
+  }
+  .options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100% !important;
   }
 </style>
 <body class="bg-indigo-50">

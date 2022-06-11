@@ -9,12 +9,11 @@ class Contenedor {
     }
 }
 
-const productos = [];
+let productos = [];
 
 const express = require('express');
 const app = express();
 const PORT = 8080;
-
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,7 +22,7 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.listen(PORT, () => {
-    console.log(`Introduce en tu navegador :  localhost:${PORT}`);
+    
 });
 
 const newId = () => {
@@ -41,15 +40,60 @@ const createJson = () => {
     fs.writeFileSync('./productos.json', json);
 }
 
+const localProd = () => {
+    let local = fs.readFileSync('./productos.json');
+    return JSON.parse(local);
+}
+
+app.get('/socket.io/socket.io.js', (req, res) => {
+    res.sendFile(__dirname + '/node_modules/socket.io/client-dist/socket.io.js');
+});
+
+app.use(express.static('views'));
+
 app.get('/', (req, res) => {
-    res.status(200).render('pages/index.ejs', {productos});
+    res.status(200).render('pages/index.ejs', { productos });
 });
 
 app.get('/productos', (req, res) => {
-    res.status(200).render('pages/productos.ejs', {productos});
+    res.status(200).render('pages/productos.ejs', { productos });
 });
 
 app.post('/productos', (req, res) => {
-    productos.push({...req.body, id: newId()});
-    res.status(200).render('pages/productos.ejs', {productos});
+    productos.push({ ...req.body, id: newId() });
+    res.status(200).render('pages/productos.ejs', { productos });
 });
+
+app.get('/support', (req, res) => {
+    res.sendFile(__dirname + '/views/chat.html');
+});
+
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const { channel } = require('diagnostics_channel');
+const io = new Server(server);
+
+server.listen(3000, () => {
+    console.log('listening on *:3000');
+});
+
+let chat = [];
+let users = [];
+
+io.on('connection', (socket) => {
+    
+    emitir()
+    sendUsers()
+
+    socket.on('incomingMessage', message => {
+        users.indexOf(message.nombre) === -1 ? null : socket.emit("changeName");
+        chat.push(message);
+        users.push(message.nombre);
+        emitir();
+        sendUsers();
+    });
+});
+
+const emitir = () => io.sockets.emit('chat', chat);
+const sendUsers = () => io.sockets.emit('usersList', users);
