@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const productos = JSON.parse(fs.readFileSync('./views/productos.json'));
+
 class Contenedor {
     constructor(nombre) {
         this.title = productos.nombre;
@@ -8,8 +10,6 @@ class Contenedor {
         this.id = productos.id;
     }
 }
-
-let productos = [];
 
 const express = require('express');
 const app = express();
@@ -21,9 +21,7 @@ app.use(express.json());
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.listen(PORT, () => {
-    
-});
+app.listen(PORT, () => {});
 
 const newId = () => {
     let id = 0;
@@ -33,16 +31,12 @@ const newId = () => {
         }
     }
     return id + 1;
+    console.log(id);
 }
 
 const createJson = () => {
     let json = JSON.stringify(productos, null, 2);
     fs.writeFileSync('./productos.json', json);
-}
-
-const localProd = () => {
-    let local = fs.readFileSync('./productos.json');
-    return JSON.parse(local);
 }
 
 app.get('/socket.io/socket.io.js', (req, res) => {
@@ -61,6 +55,7 @@ app.get('/productos', (req, res) => {
 
 app.post('/productos', (req, res) => {
     productos.push({ ...req.body, id: newId() });
+    createJson();
     res.status(200).render('pages/productos.ejs', { productos });
 });
 
@@ -78,8 +73,8 @@ server.listen(3000, () => {
     console.log('listening on *:3000');
 });
 
-let chat = [];
-let users = [];
+let chat = []; // array de mensajes
+let users = [];	// Lista de usuarios
 
 io.on('connection', (socket) => {
     

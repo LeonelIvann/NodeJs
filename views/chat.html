@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>SOPORTE</title>
 </head>
 <style>
@@ -31,6 +32,7 @@
 
     .msg {
         margin-top: 0.40rem;
+        box-shadow: -3px 5px 6px 0px #0000001f;
     }
 
     .menu {
@@ -95,6 +97,22 @@
         font-weight: lighter;
         width: -webkit-fill-available;
     }
+    .relative.max-w-xl.px-4.py-2.text-gray-700.bg-gray-100.rounded.shadow.msg-div {
+        display: flex;
+        flex-direction: row;
+        width: -webkit-fill-available;
+    }   
+    .hr-msg{
+        background: black;
+        width: 7px;
+        height: 30px;
+        margin-right: 0.5rem;
+        margin-left: 0px;
+    }
+    .user-msg{
+        width: 6.5rem;
+        border-right: 4px solid #00000057;
+    }
 </style>
 <body>
     <div class="menu">
@@ -136,6 +154,7 @@
           </li>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="index.js"></script>
     </body>
 </html>

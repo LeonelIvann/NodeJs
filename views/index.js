@@ -34,7 +34,15 @@ const hours = String(date.getHours()).padStart(2, '0') + ':' + String(date.getMi
 function sendMessage(){
 
     if (usuario.value === '') {
-        alert('Ingrese un nombre');
+        Toastify({
+            text: "Ingrese un nombre de usuario",
+            duration: 3000,
+            className: "alert",
+            style: {
+              background: "linear-gradient(to right, #f5605b, #ad110c)",
+            }
+          }).showToast();
+        usuario.focus();
         return false;
     }
 
@@ -51,11 +59,11 @@ socket.on('chat', message => {
     const texto = message.map( mensaje => {
         return(`<ul class="space-y-2 msg">
         <li class="flex justify-start">
-          <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-            <span class="block">${mensaje.usuario}</span>
+          <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow user-msg">
+            <span class="block text-lg">${mensaje.usuario}</span>
           </div>
           <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow msg-div">
-            <p class="msg-txt">${mensaje.text} ${output} ${hours} </p>
+            <p class="msg-txt"> ${mensaje.text} <strong class="italic text-xs"> ${output} ${hours} </strong> </p>
           </div>
         </li>
       </ul>`
@@ -63,8 +71,6 @@ socket.on('chat', message => {
     }).join(" ");
 
     document.getElementById("messages").innerHTML = texto;
-
-    console.log(message);
 });
 
 socket.on("usersList", users => {
@@ -72,7 +78,7 @@ socket.on("usersList", users => {
         return(`
         <li class="flex justify-start li-users">
             <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                <span class="block spanName">${user[users]}</span>
+                <span class="block spanName">${user}</span>
             </div>
         </li>`);
     }).join(" ");
