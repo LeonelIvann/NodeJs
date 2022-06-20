@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Versace",
+    "price": "8000",
+    "stock": "3",
+    "thumbnail": "https://www.versace.com/dw/image/v2/ABAO_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dw0c7e1f58/original/90_1001545-1A03037_5P230_20_MedusaMusicTights-Socks-versace-online-store_0_2.jpg?sw=1440&sh=2000&sm=fit&sfrm=jpg",
+    "id": 1
+  },
+  {
+    "title": "Dua Lipa",
+    "price": "100.000",
+    "stock": "1",
+    "thumbnail": "https://i0.wp.com/elplanetaurbano.com/wp-content/uploads/2022/02/dua_lipa.jpeg?resize=1250%2C743&ssl=1",
+    "id": 2
+  },
+  {
+    "title": "Delorean",
+    "price": "50.000",
+    "stock": "1",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Delorean_DMC-12_side.jpg",
+    "id": 3
+  },
+  {
+    "title": "Jorgitos",
+    "price": "80",
+    "stock": "500",
+    "thumbnail": "https://www.cucinare.tv/wp-content/uploads/2020/07/Jorgito.jpg",
+    "id": 4
+  },
+  {
+    "title": "Jorgitos",
+    "price": "80",
+    "stock": "500",
+    "thumbnail": "https://www.cucinare.tv/wp-content/uploads/2020/07/Jorgito.jpg",
+    "id": 5
+  }
+]
