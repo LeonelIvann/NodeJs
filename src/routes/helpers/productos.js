@@ -29,17 +29,6 @@ const createJson = () => {
     console.log(json)
 }
 
-// const editarProducto = (id, producto) => {
-//     const findProd = productos.find(prod => prod.id == id);
-//     // si el producto existe, lo edito y mantengo su id original
-//     if (findProd) {
-//         findProd.nombre = producto.nombre;
-//         findProd.price = producto.price;
-//         findProd.thumbnail = producto.thumbnail;
-//         findProd.stock = producto.stock;
-//     }
-// }
-
 exports.Contenedor = Contenedor;
 exports.newId = newId;
 exports.createJson = createJson;
