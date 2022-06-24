@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>SOPORTE</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        width: 100vw;
+        background-color: cornflowerblue;
+    }
+
+    .container-chat {
+        border: 1px solid rgba(0, 0, 0, 0.083);
+        border-radius: 5px;
+        background-color: white;
+    }
+
+    .w-full {
+        width: 40rem !important;
+    }
+
+    .msg {
+        margin-top: 0.40rem;
+        box-shadow: -3px 5px 6px 0px #0000001f;
+    }
+
+    .menu {
+        margin: 1.8rem 2rem 3rem 2rem;
+        width: -webkit-fill-available;
+        display: flex;
+        justify-content: space-between;
+    }
+    .inputName{
+        margin-bottom: 0.5rem;
+    }
+    .container-setup-name{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #nombre{
+        border: 1px solid #0000001a;
+    }
+    #mensaje{
+        border: 1px solid #0000001a;
+    }
+    .msg-div span{
+        display: flex;
+        flex-direction: row;
+    }
+    .msg-div span p{
+        margin-left: 0.5rem;
+    }
+    .container-users{
+        display: flex;
+        flex-direction: row;
+        width: 38rem;
+        height: 3rem;
+        overflow: overlay;
+    }
+    .container-users ul{
+        margin-right: 0.5rem;
+    }
+    .msg-txt{
+        width: -webkit-fill-available;
+    }
+    .msg-txt p{
+        width: 30rem !important;
+    }
+    .hr-msg{
+        height: min-content;
+        transform: rotate(90deg);
+    }
+    .spanName span{
+        height: 2.5rem !important;
+    }
+    .li-users{
+        height: fit-content;
+        width: 3rem;
+        margin-right: 1rem;
+    }
+    .text-base{
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: lighter;
+        width: -webkit-fill-available;
+    }
+    .relative.max-w-xl.px-4.py-2.text-gray-700.bg-gray-100.rounded.shadow.msg-div {
+        display: flex;
+        flex-direction: row;
+        width: -webkit-fill-available;
+    }   
+    .hr-msg{
+        background: black;
+        width: 7px;
+        height: 30px;
+        margin-right: 0.5rem;
+        margin-left: 0px;
+    }
+    .user-msg{
+        width: 6.5rem;
+        border-right: 4px solid #00000057;
+    }
+</style>
+<body>
+    <div class="menu">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+            <a href="/">INICIO</a>
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+            <a href="/productos">PRODUCTOS</a>
+        </button>
+    </div>
+    <div class="container-chat">
+        <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
+            <div class="container-setup-name">
+                <p class="text-base font-sans uppercase">Ingresa un nombre de usuario</p>
+                <input type="text" placeholder="Nickname"
+                    class="block  py-2 pl-4 bg-gray-100 rounded-full outline-none focus:text-gray-700 inputName"
+                    name="nombre" id="nombre" required maxlength="6"/>
+            </div>
+            <hr>
+            <div id="messages"></div>
+        </div>
+        <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
+            <input type="text" placeholder="Message"
+                class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
+                name="message" id="mensaje" required maxlength="50"/>
+            <button type="submit" id="submit-button">
+                <svg class="w-5 h-5 text-gray-500 origin-center transform rotate-90" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+            </button>
+        </div>
+        <li class="flex flex-row">
+            <div class="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4 display-user">
+              <div class="flex-1 pl-1 container-users" id="listUsers">
+                
+              </div>
+            </div>
+          </li>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="socket.js"></script>
+    </body>
+</html>

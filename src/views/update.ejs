@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Inicio</title>
+</head>
+<style>
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      width: 100vw;
+  }
+  form{
+    height: 18rem;
+  }
+  .td-img{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8rem;
+    overflow: overlay;
+  }
+  .menu{
+    margin: 1.8rem 2rem 3rem 2rem;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: space-between;
+  }
+  .contentForm{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: -webkit-fill-available;
+    height: 30rem;
+    justify-content: space-around;
+  }
+  .tablaDeProductos{
+    text-align: center;
+    margin: 1.8rem 0rem 3rem 0rem;
+    width: 72rem;
+    border-radius: 5px;
+  }
+  .container-img img{
+    height: 8rem;
+  }
+  .tbodyClass{
+    height: 10rem;
+    overflow: scroll;
+  }
+  .options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100% !important;
+  }
+  table{
+    width: 55em;
+  }
+</style>
+<body class="bg-indigo-50">
+    <h1>ACTUALIZAR</h1>
+    <%- include('./pages/partials/updateForm.ejs') %>
+    <%- include('./pages/partials/table.ejs') %>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Productos</title>
+</head>
+<style>
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  body{
+      overflow: scroll;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      width: 100vw;
+  }
+  form{
+    height: fit-content;
+    margin-top: 15rem;
+  }
+  .container-img{
+    width: 20rem;
+  }
+  .td-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    overflow: scroll;
+  }
+  .menu{
+    margin: 1.8rem 2rem 3rem 2rem;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+<body class="bg-indigo-50">
+    <%- include('./partials/menu.ejs') %>
+    <%- include('./partials/table.ejs') %> 
+</body>
+</html>
