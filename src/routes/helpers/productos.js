@@ -1,7 +1,8 @@
 const fs = require('fs');
 var express = require('express');
 const { useParams } = require('express');
-const productos = JSON.parse(fs.readFileSync('../utils/productos.json'));
+const productos = [];
+// const productos = JSON.parse(fs.readFileSync('../../../productos.json'));
 
 class Contenedor {
     constructor(nombre) {

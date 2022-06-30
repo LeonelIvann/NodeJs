@@ -1,4 +1,4 @@
-<% if ( productos.length===0) { %>
+<% if ( producd.length===0) { %>
     <h2>NO HAY PRODUCTOS INGRESADOS</h2>
     <% } else { %>
         <table class="table-fixed">
@@ -9,27 +9,30 @@
                     <th class="w-1/4 px-4 py-2">PRECIO</th>
                     <th class="w-1/4 px-4 py-2">STOCK</th>
                     <th class="w-1/4 px-4 py-2">ID</th>
-                    <th class="w-1/4 px-4 py-2">Timestamp</th>
+                    <th class="w-1/4 px-4 py-2">Ultima Actualización</th>
                 </tr>
             </thead>
             <tbody>
-                <% productos.forEach(elemento=> { %>
+                <% producd.forEach(producd=> { %>
                     <tr>
                         <td class="border px-4 py-2 td-img">
                             <div class="container-img">
-                                <img src="<%= elemento.thumbnail %>" alt="">
+                                <img src="<%= producd.thumbnail %>" alt="">
                             </div>
                         </td>
                         <td class="border px-4 py-2">
-                            <%= elemento.title %>
+                            <%= producd.titulo %>
                         </td>
                         <td class="border px-4 py-2">
-                            <%= elemento.price %>
+                            <%= producd.precio %>
                         </td>
                         <td class="border px-4 py-2">
-                            <%= elemento.stock %>
+                            <%= producd.stock %>
                         <td class="border px-4 py-2 id-btn">
-                            <%= elemento.id %>
+                            <%= producd.id %>
+                        </td>
+                        <td class="border px-4 py-2 id-btn">
+                            <%= producd.updateAt %>
                         </td>
                     </tr>
                     <% }) %>

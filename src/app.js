@@ -1,9 +1,22 @@
-let { chat } = require("../utils/chat");
-let { users } = require("../utils/users");
+let { chat } = require("../arrays/chat");
+let { users } = require("../arrays/users");
+
+const db = require("../db/dbconnection")
+
 
 const express = require('express');
 const app = express();
 const PORT = 8080;
+
+(async () => {
+    try {
+        await db.authenticate();
+        await db.sync();
+        console.log("Conexion exitosa a la base de datos")
+    } catch (error) {
+        throw new Error(error + "Error en la conexión")
+    }
+})();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
