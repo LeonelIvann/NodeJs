@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 
+let chat = [];
+let users = [];
+
 (async () => {
     try {
         await db.authenticate();
@@ -39,14 +42,14 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const { channel } = require('diagnostics_channel');
-const Chat = require("../db/models/chat");
 const io = new Server(server);
+const Chat = require("../db/models/chat");
 
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
 
-const usuario = [];
+const usuario = Chat;
 const mensaje = [];
 
 io.on('connection', async (socket) => {
