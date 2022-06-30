@@ -26,6 +26,7 @@ socket.on('messages', function(data) { render(data) });
 
 const button = document.getElementById('submit-button').addEventListener('click', sendMessage);
 const usuario = document.getElementById('nombre');
+
 // fecha
 let timestamp = Date()
 const d = new Date( timestamp );
@@ -73,12 +74,12 @@ socket.on('chat', message => {
     document.getElementById("messages").innerHTML = texto;
 });
 
-socket.on("usersList", users => {
-    const liUser = Object.keys(users).map( user => {
+socket.on("usersList", usuario => {
+    const liUser = Object.keys(usuario).map( usuario => {
         return(`
         <li class="flex justify-start li-users">
             <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                <span class="block spanName">${user}</span>
+                <span class="block spanName">${usuario}</span>
             </div>
         </li>`);
     }).join(" ");

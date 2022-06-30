@@ -1,9 +1,4 @@
-let { chat } = require("../arrays/chat");
-let { users } = require("../arrays/users");
-
 const db = require("../db/dbconnection")
-
-
 const express = require('express');
 const app = express();
 const PORT = 8080;
@@ -44,26 +39,30 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const { channel } = require('diagnostics_channel');
-const { productos } = require("./routes/helpers/productos");
+const Chat = require("../db/models/chat");
 const io = new Server(server);
 
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
 
-io.on('connection', (socket) => {
+const usuario = [];
+const mensaje = [];
+
+io.on('connection', async (socket) => {
+
     
     emitir()
     sendUsers()
 
     socket.on('incomingMessage', message => {
-        users.indexOf(message.nombre) === -1 ? null : socket.emit("changeName");
-        chat.push(message);
-        users.push(message.nombre);
+        usuario.indexOf(message.nombre) === -1 ? null : socket.emit("changeName");
+        mensaje.push(message);
+        usuario.push(message.nombre);
         emitir();
         sendUsers();
     });
 });
 
-const emitir = () => io.sockets.emit('chat', chat);
-const sendUsers = () => io.sockets.emit('usersList', users);
+const emitir = () => io.sockets.emit('chat', mensaje);
+const sendUsers = () => io.sockets.emit('usersList', usuario);
